@@ -1,8 +1,6 @@
 example-busybox-http
 ====================
 
-The smallest Deis app ever!
-
 Deploying to Deis
 -----------------
 
