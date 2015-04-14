@@ -1,5 +1,4 @@
 FROM ubuntu-debootstrap:14.04
-MAINTAINER OpDemand <info@opdemand.com>
 
 RUN apt-get update && \
   apt-get install -y netcat-openbsd && \

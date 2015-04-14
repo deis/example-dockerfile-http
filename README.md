@@ -1,5 +1,5 @@
-example-busybox-http
-====================
+example-dockerfile-http
+=======================
 
 Deploying to Deis
 -----------------
