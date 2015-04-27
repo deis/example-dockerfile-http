@@ -1,0 +1,26 @@
+daemon            off;
+worker_processes  1;
+error_log         /dev/stderr info;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    access_log    /dev/stdout combined;
+
+    server {
+        listen       1500;
+        server_name  localhost;
+
+        location / {
+            set    $powered_by ${POWERED_BY};
+            ssi    on;
+            root   html;
+            index  index.html index.htm;
+        }
+    }
+
+}
