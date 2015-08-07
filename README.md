@@ -13,49 +13,59 @@ $ deis create
 Creating application... done, created zipped-doghouse
 Git remote deis added
 $ git push deis master
-Counting objects: 24, done.
-Delta compression using up to 4 threads.
-Compressing objects: 100% (24/24), done.
-Writing objects: 100% (24/24), 3.01 KiB | 0 bytes/s, done.
-Total 24 (delta 5), reused 0 (delta 0)
+Counting objects: 17, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (7/7), done.
+Writing objects: 100% (17/17), 1.45 KiB | 0 bytes/s, done.
+Total 17 (delta 0), reused 0 (delta 0)
 
 -----> Building Docker image
-remote: build context to Docker daemon 3.072 kB
+remote: build context to Docker daemon 14.34 kB
+remote: build context to Docker daemon
 Step 0 : FROM alpine:3.1
-Pulling repository alpine
-b3dbab3810fc: Pulling image (3.1) from alpine
-...
-Status: Downloaded newer image for alpine:3.1
- ---> b3dbab3810fc
-Step 1 : RUN apk add -U bash socat && rm -rf /var/cache/apk*
- ---> Running in 679e2985f6a6
+ ---> 878b6301beda
+Step 1 : RUN apk add -U         bash    nginx   && rm -rf /var/cache/apk*
+ ---> Running in b102ad65858e
 fetch http://dl-4.alpinelinux.org/alpine/v3.1/main/x86_64/APKINDEX.tar.gz
-(1/5) Installing ncurses-terminfo-base (5.9-r3)
-(2/5) Installing ncurses-libs (5.9-r3)
-(3/5) Installing readline (6.3-r3)
-(4/5) Installing bash (4.3.30-r0)
-(5/5) Installing socat (1.7.3.0-r0)
-Executing busybox-1.22.1-r14.trigger
-OK: 7 MiB in 20 packages
- ---> 97dabf10bf4a
-Removing intermediate container 679e2985f6a6
-Step 2 : ENV POWERED_BY Deis
- ---> Running in d85ec8dfb01a
- ---> 5c24a17d2aa7
-Removing intermediate container d85ec8dfb01a
-Step 3 : CMD socat TCP4-LISTEN:1500,fork EXEC:"echo HTTP/1.1 200 OK\n\nPowered by $POWERED_BY"
- ---> Running in 8a6098293e0a
- ---> 690d7f328473
-Removing intermediate container 8a6098293e0a
-Step 4 : EXPOSE 1500
- ---> Running in a62cbc2a9bd2
- ---> 494c983c25fb
-Removing intermediate container a62cbc2a9bd2
-Step 5 : ENV GIT_SHA 9598de4114fbabdde9f5a1ec740d085401ac90f3
- ---> Running in 22739f6b44c5
- ---> db7c322a9367
-Removing intermediate container 22739f6b44c5
-Successfully built db7c322a9367
+(1/6) Installing ncurses-terminfo-base (5.9-r3)
+(2/6) Installing ncurses-libs (5.9-r3)
+(3/6) Installing readline (6.3-r3)
+(4/6) Installing bash (4.3.30-r0)
+(5/6) Installing pcre (8.36-r2)
+(6/6) Installing nginx (1.6.2-r1)
+Executing nginx-1.6.2-r1.pre-install
+Executing busybox-1.22.1-r15.trigger
+OK: 8 MiB in 21 packages
+ ---> a42c69c8166d
+Removing intermediate container b102ad65858e
+Step 2 : RUN ln -sf /dev/stdout /var/log/nginx/access.log
+ ---> Running in 222ef65b2bc8
+ ---> 8e842b2ddac9
+Removing intermediate container 222ef65b2bc8
+Step 3 : RUN ln -sf /dev/stderr /var/log/nginx/error.log
+ ---> Running in 827ea0fbdaca
+ ---> 0072af10d448
+Removing intermediate container 827ea0fbdaca
+Step 4 : ENV POWERED_BY Deis
+ ---> Running in 5e02d3a7623a
+ ---> d5dc43a1857c
+Removing intermediate container 5e02d3a7623a
+Step 5 : COPY rootfs /
+ ---> dfd0ec3bf508
+Removing intermediate container cd988893ffa9
+Step 6 : CMD /bin/boot
+ ---> Running in 84bf0178054d
+ ---> c486f41ee92f
+Removing intermediate container 84bf0178054d
+Step 7 : EXPOSE 80
+ ---> Running in dc0e3ef32941
+ ---> ac23f7a495fc
+Removing intermediate container dc0e3ef32941
+Step 8 : ENV GIT_SHA 902c232bc9a382013e5b6a14b586e907cb8bc3bc
+ ---> Running in 6a9ea2dadf80
+ ---> e65fef6110cf
+Removing intermediate container 6a9ea2dadf80
+Successfully built e65fef6110cf
 -----> Pushing image to private registry
 
 -----> Launching...
