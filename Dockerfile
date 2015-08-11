@@ -1,6 +1,17 @@
 FROM alpine:3.1
 
-RUN apk add -U bash socat && rm -rf /var/cache/apk*
+RUN apk add -U \
+	bash \
+	nginx \
+	&& rm -rf /var/cache/apk*
+
+# forward request and error logs to docker log collector
+RUN ln -sf /dev/stdout /var/log/nginx/access.log
+RUN ln -sf /dev/stderr /var/log/nginx/error.log
+
 ENV POWERED_BY Deis
-CMD socat TCP4-LISTEN:1500,fork EXEC:"echo \"HTTP/1.1 200 OK\n\nPowered by $POWERED_BY\""
-EXPOSE 1500
+
+COPY rootfs /
+
+CMD ["/bin/boot"]
+EXPOSE 80
