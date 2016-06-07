@@ -22,14 +22,14 @@ Total 63 (delta 20), reused 0 (delta 0)
 
 -----> Building Docker image
 remote: Sending build context to Docker daemon 14.34 kB
-Step 0 : FROM alpine:3.3
-3.3: Pulling from library/alpine
+Step 0 : FROM alpine:3.4
+3.4: Pulling from library/alpine
 3571dd565f47: Pulling fs layer
 3571dd565f47: Verifying Checksum
 3571dd565f47: Download complete
 3571dd565f47: Pull complete
 Digest: sha256:2d4f890b7eddb390285e3afea9be98a078c2acd2fb311da8c9048e3d1e4864d3
-Status: Downloaded newer image for alpine:3.3
+Status: Downloaded newer image for alpine:3.4
  ---> 3571dd565f47
 Step 1 : RUN apk add -U 	bash 	nginx 	&& rm -rf /var/cache/apk*
  ---> Running in 6cdd54978d8c
