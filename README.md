@@ -2,7 +2,7 @@
 
 This guide will walk you through deploying a trivial
 [Dockerfile](https://docs.docker.com/reference/builder/) HTTP application
-on [Deis](https://github.com/deis/deis).
+on [Deis Workflow](https://github.com/deis/workflow).
 
 ## Usage
 
@@ -10,11 +10,11 @@ on [Deis](https://github.com/deis/deis).
 $ git clone https://github.com/deis/example-dockerfile-http.git
 $ cd example-dockerfile-http
 $ deis create
-Creating Application... done, created upbeat-dragster
+Creating Application... done, created nimbus-electron
 Git remote deis added
-remote available at ssh://git@deis.local3.deisapp.com:2222/upbeat-dragster.git
+remote available at ssh://git@deis-builder.deis.rocks:2222/nimbus-electron.git
 $ git push deis master
-Counting objects: 63, done.
+Counting objects: 64, done.
 Delta compression using up to 4 threads.
 Compressing objects: 100% (53/53), done.
 Writing objects: 100% (63/63), 8.53 KiB | 0 bytes/s, done.
@@ -43,61 +43,55 @@ fetch http://dl-4.alpinelinux.org/alpine/v3.3/community/x86_64/APKINDEX.tar.gz
 Executing bash-4.3.42-r3.post-install
 (6/8) Installing nginx-initscripts (1.8.0-r0)
 Executing nginx-initscripts-1.8.0-r0.pre-install
-(7/8) Installing pcre (8.38-r0)
+(7/8) Installing pcre (8.38-r1)
 (8/8) Installing nginx (1.8.1-r0)
 Executing busybox-1.24.1-r7.trigger
 OK: 14 MiB in 19 packages
- ---> 9434dd06a084
-Removing intermediate container 6cdd54978d8c
-Step 2 : RUN ln -sf /dev/stdout /var/log/nginx/access.log
- ---> Running in 38f14358233d
- ---> 4ffef06ba6a0
-Removing intermediate container 38f14358233d
-Step 3 : RUN ln -sf /dev/stderr /var/log/nginx/error.log
- ---> Running in 60f4ae7f4756
- ---> 050b810046b9
-Removing intermediate container 60f4ae7f4756
-Step 4 : ENV POWERED_BY Deis
- ---> Running in c9fc78347b02
- ---> 47af3c178d1d
-Removing intermediate container c9fc78347b02
-Step 5 : COPY rootfs /
- ---> 4ac01469f15c
-Removing intermediate container fe62caa50306
-Step 6 : CMD /bin/boot
- ---> Running in 741d73e3b20f
- ---> ca9f2bdb5683
-Removing intermediate container 741d73e3b20f
-Step 7 : EXPOSE 80
- ---> Running in 0e14c04fa674
- ---> e4739432f005
-Removing intermediate container 0e14c04fa674
-Step 8 : ENV GIT_SHA 7ae43cc95305a4a208ff9a4950872f1bbe86a3f8
- ---> Running in 69ab5944413c
- ---> e36e1c6e0a89
-Removing intermediate container 69ab5944413c
-Successfully built e36e1c6e0a89
------> Pushing image to private registry
+---> b56a0595c44d
+Removing intermediate container b96da2893372
+Step 3 : RUN ln -sf /dev/stdout /var/log/nginx/access.log
+---> Running in 569e8626cceb
+---> 4da31bb5fa5a
+Removing intermediate container 569e8626cceb
+Step 4 : RUN ln -sf /dev/stderr /var/log/nginx/error.log
+---> Running in 206f928f8826
+---> e08b8388af37
+Removing intermediate container 206f928f8826
+Step 5 : RUN echo двенадцать фактор для жизни
+---> Running in 0ce0cdb93a9f
+двенадцать фактор для жизни
+---> a5c98927c99d
+Removing intermediate container 0ce0cdb93a9f
+Step 6 : ENV POWERED_BY Deis
+---> Running in 5b1ccf6cd05e
+---> d8366e89f689
+Removing intermediate container 5b1ccf6cd05e
+Step 7 : COPY rootfs /
+---> 81318cef722d
+Removing intermediate container 1d45f43721f0
+Step 8 : CMD /bin/boot
+---> Running in a11cd06c1ffb
+---> 7e836b539eb3
+Removing intermediate container a11cd06c1ffb
+Step 9 : EXPOSE 80
+---> Running in 7b45e0a8080a
+---> 4d982af34477
+Removing intermediate container 7b45e0a8080a
+Successfully built 4d982af34477
+Pushing to registry
+Build complete.
+Launching App...
+Done, nimbus-electron:v2 deployed to Deis
 
------> Launching...
-       done, upbeat-dragster:v2 deployed to Deis
+Use 'deis open' to view this application in your browser
 
-       http://upbeat-dragster.local3.deisapp.com
+To learn more, use 'deis help' or visit https://deis.com/
 
-       To learn more, use `deis help` or visit http://deis.io
-
-To ssh://git@deis.local3.deisapp.com:2222/upbeat-dragster.git
+To ssh://git@deis-builder.deis.rocks:2222/nimbus-electron.git
  * [new branch]      master -> master
-$ curl http://upbeat-dragster.local3.deisapp.com
+$ curl http://nimbus-electron.deis.rocks
 Powered by Deis
-$ deis config:set POWERED_BY="Engine Yard"
-Creating config... done, v3
-
-=== upbeat-dragster Config
-POWERED_BY      Engine Yard
-$ curl http://upbeat-dragster.local3.deisapp.com
-Powered by Engine Yard
-```
+ ```
 
 ## Additional Resources
 
