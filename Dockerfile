@@ -10,7 +10,7 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log
 RUN ln -sf /dev/stderr /var/log/nginx/error.log
 
 # echo some unicode as a regression test for https://github.com/deis/dockerbuilder/issues/49
-RUN echo двенадцать фактор для жизни
+RUN echo Кубернетис в каждый датацентр!
 
 ENV POWERED_BY Deis
 
